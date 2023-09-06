@@ -26,13 +26,9 @@ var categorias = new List<Categoria>
 
 app.MapGet("/categorias", () =>
 {
-var categoria = categorias.Select(c => new
-{
-c.Id,
-c.Nombre
-});
 
-return categoria;
+
+return categorias;
 });
 
 app.Run();
