@@ -18,18 +18,21 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-var categorias = new List<Categoria>();
-
-app.MapPost("/categorias", (Categoria categoria) =>
+var categorias = new List<Categoria>
 {
-    categoria.Id = categorias.Count + 1;
-   categorias.Add(categoria);
-    return Results.Created($"/categorias/{categoria.Id}", categoria);
-});
+    new Categoria { Id = 1, Nombre = "Categoría 1" },
+    new Categoria { Id = 2, Nombre = "Categoría 2" },
+};
 
 app.MapGet("/categorias", () =>
 {
-return categorias;
+var categoria = categorias.Select(c => new
+{
+c.Id,
+c.Nombre
+});
+
+return categoria;
 });
 
 app.Run();
